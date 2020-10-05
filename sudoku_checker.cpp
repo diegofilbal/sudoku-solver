@@ -5,6 +5,7 @@
 #define EMPTY short(0)
 #define SIZE 9
 
+using namespace std;
 
 typedef short board_t[SIZE][SIZE];
 
@@ -23,7 +24,7 @@ bool read_input (board_t b){
 
     for (short i{0}; i < SIZE; i++)
         for (short j{0}; j < SIZE; j++){
-            if (std::cin >> data) // Verifies if there is still data to be read
+            if (cin >> data) // Verifies if there is still data to be read
                 b[i][j] = data;
             else // Failure
                 error_flag = 1;
@@ -37,17 +38,17 @@ bool read_input (board_t b){
 
 void print (board_t b){ // Prints the whole given matrix to the user
     
-    std::cout << "\n";
+    cout << "\n";
 
     for (short i{0}; i < SIZE; i++){
-        if(i == 3 || i == 6)
-            std::cout << "_____________________\n\n";
+        if (i == 3 || i == 6)
+            cout << "_____________________\n\n";
 
         for (short j{0}; j < SIZE; j++){
-            if(j == 3 || j == 6) std::cout << "  ";
-            std::cout << b[i][j] << " ";
+            if (j == 3 || j == 6) cout << "  ";
+            cout << b[i][j] << " ";
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 }
 
@@ -56,7 +57,7 @@ bool verify_row (int i, board_t b){ // Verifies if each number appears only once
     short cont[9] {0, 0, 0, 0, 0, 0, 0, 0, 0}; // Counting vector, the index indicates de value in the matrix line
 
     for (short j{0}; j < SIZE; j++){
-        if(b[i][j] >= 1 && b[i][j] <= 9) // Verifies if the number is in range
+        if (b[i][j] >= 1 && b[i][j] <= 9) // Verifies if the number is in range
             cont[ (b[i][j] - 1) ]++; // Increments in the counting vector
         else
             return 0;
@@ -73,7 +74,7 @@ bool verify_column (int i, board_t b){ // Verifies if each number appears only o
     short cont[9] {0, 0, 0, 0, 0, 0, 0, 0, 0}; // Counting vector, the index indicates de value in the matrix column
 
     for (short j{0}; j < SIZE; j++){
-        if(b[j][i] >= 1 && b[j][i] <= 9) // Verifies if the number is in range
+        if (b[j][i] >= 1 && b[j][i] <= 9) // Verifies if the number is in range
             cont[ (b[j][i] - 1) ]++; // Increments in the counting vector
         else
             return 0;
@@ -91,7 +92,7 @@ bool verify_quadrant (short i, short j, board_t b){
 
     for (short k{i}; k < i + 3; k++){
         for (short l{j}; l < j + 3; l++){
-            if(b[k][l] >= 1 && b[k][l] <= 9) // Verifies if the number is in proper range
+            if (b[k][l] >= 1 && b[k][l] <= 9) // Verifies if the number is in proper range
                 cont[ (b[k][l] - 1) ]++; // Increments in the counting vector
             else
                 return 0;
@@ -126,10 +127,10 @@ int main (void){
     short i{0}; // Iterator for board counting
 
     while(read_input(board)){ // It keeps running while there is still data in the input
-        std::cout << "\nBoard #" << (i+1) << ": \n";
+        cout << "\nBoard #" << (i+1) << ": \n";
         print( board );
-        std::cout << "\n>> Is valid? " << std::boolalpha << is_valid( board ) << std::endl;
-        std::cout << "\n";
+        cout << "\n>> Is valid? " << std::boolalpha << is_valid( board ) << std::endl;
+        cout << "\n";
         i++;
     }
 
